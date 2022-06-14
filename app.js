@@ -9,12 +9,14 @@ const express= require("express");
 const app=express()
 
 
-const db= require('./database/db');
+const database= require('./database/db');
 
 
 app.use(express.json())
 app.use(cors())
 
+const indexRoutes = require('./Routes/user.route')
+app.use('/api', indexRoutes);
 
 
 app.get("/",(req,res)=>{
