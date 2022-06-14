@@ -6,12 +6,12 @@ const userModel = require('../Models/userModel');
 const {
     nanoid
 } = require('nanoid')
-
+*/
 const {
     generateJwtToken
 } = require('../helpers/helper');
 
-*/
+
 
 const signup = (req, res) => {
 
@@ -63,7 +63,13 @@ const signup = (req, res) => {
             }
             if (user) {
 
-                //const token = generateJwtToken(user._id, user.role);
+                const token = generateJwtToken(user._id, user.role);
+                /**
+                 * Generally to generate token we pass hte mongodb_id. 
+                 * So we pass the id of that collection and not of that user .
+                 * it is agood practice .that what we have done above
+
+                 */
                 return res.json({
                     success: true,
                     message: "User has been successfully saved",
@@ -72,7 +78,7 @@ const signup = (req, res) => {
                             fullname: user.fullname,
                             email: user.email
                         },
-                        //token: token
+                        token: token
                     }
                 })
             }
@@ -105,16 +111,23 @@ const signin = (req, res) => {
             const isAuthenticated = data.authenticate(password);
             if (isAuthenticated) {
 
-               // const token = generateJwtToken(data._id, data.role);
+               const token = generateJwtToken(data._id, data.role);
+                 /**
+                 * Generally to generate token we pass hte mongodb_id. 
+                 * So we pass the id of that collection and not of that user .
+                 * it is agood practice .that what we have done above
+
+                 */
                 return res.json({
                     success: true,
                     message: "User Login successfully",
                     data: {
                         user: {
+                            role:data.role,
                             fullname: data.fullname,
                             email: data.email
                         },
-                   //     "token": token
+                       "token": token
                     }
                 })
 
