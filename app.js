@@ -15,8 +15,8 @@ const database= require('./database/db');
 app.use(express.json())
 app.use(cors())
 
-const indexRoutes = require('./Routes/user.route')
-app.use('/api', indexRoutes);
+const indexrouter= require('./Routes/index.router')
+app.use('/api', indexrouter);
 
 
 app.get("/",(req,res)=>{
