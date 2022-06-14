@@ -32,20 +32,17 @@ router.post('/signup',usercontroller.signup);
 
 
 
-/*
+
 const {
     validateSignUpRequest,
     validateSignInRequest,
     isRequestCorrect
-} = require('../../middleware/request.validator');
-
-*/
+} = require('../middleware/request.validator');
 
 
-//router.post('/signup', validateSignUpRequest, isRequestCorrect, signup);
-router.post('/signup',signup);
 
-//router.post('/signin', validateSignInRequest, isRequestCorrect, signin);
-router.post('/signin',signin);
+router.post('/signup', validateSignUpRequest, isRequestCorrect, signup);
+
+router.post('/signin', validateSignInRequest, isRequestCorrect, signin);
 
 module.exports = router;

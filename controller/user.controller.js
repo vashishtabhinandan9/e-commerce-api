@@ -11,7 +11,8 @@ const {
     generateJwtToken
 } = require('../helpers/helper');
 
-
+//console.log("-----------start-----------")//these are basicaly like a checkpoint till 
+//where our code is executed
 
 const signup = (req, res) => {
 
@@ -36,6 +37,8 @@ const signup = (req, res) => {
         }
 
 
+//console.log("-----------start-----------")
+
         if (data) {
             return res.json({
                 success: false,
@@ -53,6 +56,9 @@ const signup = (req, res) => {
         });
 
         _user.save((error, user) => {
+            
+//console.log("-----------start-----------")
+
             if (error) {
                 console.log(error);
 
@@ -88,6 +94,8 @@ const signup = (req, res) => {
 
 const signin = (req, res) => {
 
+//console.log("-----------start-----------")
+
     const {
         email,
         password
@@ -107,6 +115,8 @@ const signin = (req, res) => {
         }
 
         if (data) {
+
+//console.log("-----------start-----------")
 
             const isAuthenticated = data.authenticate(password);
             if (isAuthenticated) {
