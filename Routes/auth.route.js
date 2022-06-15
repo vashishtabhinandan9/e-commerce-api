@@ -19,7 +19,7 @@ const router = express.Router();
 const {
     signup,
     signin
-} = require('../controller/user.controller');
+} = require('../controller/auth.controller');
 
 /**
  * otherway of requiring a function passed

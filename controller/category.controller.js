@@ -21,8 +21,7 @@ const addNewCategory = (req, res) => {
         })
     };
 
-   // categoryInput.createdBy = req.user.id;//this is we creating an object field outside object
-    
+   // categoryInput.createdBy = req.user.id;
 
     if (req.body.parentId) {
         categoryInput.parentId = req.body.parentId;//this is we creating an object field 
@@ -96,8 +95,41 @@ const addNewCategory = (req, res) => {
  * 
  */
 
+
 const getCategory = async (req, res) => {
-/*
+
+    /*
+    method 1 to get category using exec() function
+
+await categoryModel.find({}).exec((error,data)=>{
+        if(error){
+            return res.status(500).json({
+                
+                success: false,
+                message: "Some Error occurred while searching category contact your administrator"
+                
+            })
+        }
+
+        if(data){
+            return res.status(200).json({
+                success:true,
+                data:{
+                    data
+                }
+            })
+        }
+
+        }
+        )
+}
+
+*/
+   
+
+//method 2 to get category using try and catch  and generate a tree  of all subcategory
+   
+
     try {
         const category = await categoryModel.find({}, '_id name slug parentId type');
         const resp = generateCategoryData(category);
@@ -114,11 +146,12 @@ const getCategory = async (req, res) => {
         });
     }
 
-*/
+
 }
 
+
 const generateCategoryData = (allCategories, parentId = null) => {
-    /*
+    
     const CategoryJSON = [];
     let _parentId; //undefined
     if (parentId != null)
@@ -130,7 +163,7 @@ const generateCategoryData = (allCategories, parentId = null) => {
         const element = categories[i];
         let categoryObj = {
             _id: element._id,
-            name: element.name,
+              name: element.name,
             slug: element.slug,
             type: element.type,
             parentId: element.parentId,
@@ -140,7 +173,7 @@ const generateCategoryData = (allCategories, parentId = null) => {
     }
     return CategoryJSON;
 
-    */
+    
 }
 
 

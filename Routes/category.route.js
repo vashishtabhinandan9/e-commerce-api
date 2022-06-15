@@ -23,5 +23,5 @@ router.get("/get", getCategory)
 */
 
 router.post("/create",addNewCategory)
-
+router.get("/get", getCategory)
 module.exports = router;
