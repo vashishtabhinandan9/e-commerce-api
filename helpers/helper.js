@@ -8,8 +8,8 @@ const generateJwtToken = (id, role) => {
         expiresIn: '1d'
     });
 }
-/*
-const ErrorArray = [];
+
+const ErrorArray = [];//day34 35 time after 1:15:00
 ErrorArray[500] = "DB Error Occurred. Contact your administrator"
 ErrorArray[400] = "Bad Request"
 
@@ -42,7 +42,6 @@ const getResponseV2 = (res, state, statusCode, message = "", data = []) => {
     })
 }
 
-*/
 
 module.exports = {
     generateJwtToken

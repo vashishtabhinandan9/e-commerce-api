@@ -1,18 +1,12 @@
-const bcrypt=require('bcryptjs')
-
-const userModel = require('../Models/userModel');
-
-/*
-const {
+/*const {
     nanoid
 } = require('nanoid')
 */
+const userModel = require('../../Models/userModel');
 const {
     generateJwtToken
-} = require('../helpers/helper');
+} = require('../../helpers/helper')
 
-//console.log("-----------start-----------")//these are basicaly like a checkpoint till 
-//where our code is executed
 
 const signup = (req, res) => {
 
@@ -30,60 +24,48 @@ const signup = (req, res) => {
         if (error) {
             console.log(error);
 
-            return res.status(500).json({//status 550 means 
+            return res.status(500).json({
                 success: false,
                 message: "Some Error occurred while searching for existing email. Contact your administrator"
             });
         }
 
 
-//console.log("-----------start-----------")
-
         if (data) {
             return res.json({
                 success: false,
-                message: "User Email Already Exists."
+                message: "Admin Email Already Exists."
             })
         }
 
 
-        const _user = new userModel({
+        const _admin = new userModel({
             email,
             firstname,
             lastname,
             password,
-            username: Math.random().toString(),
+            role: 'admin',
+            username: Math.random.toString(),
         });
 
-        _user.save((error, user) => {
-            
-//console.log("-----------start-----------")
-
+        _admin.save((error, admin) => {
             if (error) {
                 console.log(error);
 
                 return res.status(500).json({
                     success: false,
-                    message: "Some Error occurred while saving the user. Contact your administrator"
+                    message: "Some Error occurred while saving the admin. Contact your administrator"
                 });
             }
-            if (user) {
+            if (admin) {
 
-                const token = generateJwtToken(user._id, user.role);
-                /**
-                 * Generally to generate token we pass hte mongodb_id. 
-                 * So we pass the id of that collection and not of that user .
-                 * it is agood practice .that what we have done above
-
-                 */
+                const token = generateJwtToken(admin._id, admin.role);
                 return res.json({
                     success: true,
-                    message: "User has been successfully saved",
+                    message: "Admin has been successfully saved",
+                
                     data: {
-                        user: {
-                            fullname: user.fullname,
-                            email: user.email
-                        },
+                        admin,
                         token: token
                     }
                 })
@@ -93,8 +75,6 @@ const signup = (req, res) => {
 }
 
 const signin = (req, res) => {
-
-//console.log("-----------start-----------")
 
     const {
         email,
@@ -114,44 +94,41 @@ const signin = (req, res) => {
             });
         }
 
-        if (data) {
-
-//console.log("-----------start-----------")
+        if (data) { 
+            if (data.role != 'admin') {
+                return res.status(403).json({
+                    success: false,
+                    message: "Access Forbidden.only for admin"
+                });
+            }
 
             const isAuthenticated = data.authenticate(password);
             if (isAuthenticated) {
 
-               const token = generateJwtToken(data._id, data.role);
-                 /**
-                 * Generally to generate token we pass hte mongodb_id. 
-                 * So we pass the id of that collection and not of that user .
-                 * it is agood practice .that what we have done above
-
-                 */
+                const token = generateJwtToken(data._id, data.role);
                 return res.json({
                     success: true,
-                    message: "User Login successfully",
+                    message: "Admin Login successfully",
                     data: {
                         user: {
-                            role:data.role,
                             fullname: data.fullname,
                             email: data.email
                         },
-                       "token": token
+                        "token": token
                     }
                 })
 
             } else {
                 return res.json({
                     success: false,
-                    message: "User Login failed. Bad Authentication"
+                    message: "Admin Login failed. Bad Authentication"
                 })
             }
 
         } else {
             return res.json({
                 success: false,
-                message: "User Email Does not exist."
+                message: "Admin Email Does not exist."
             });
         }
     })

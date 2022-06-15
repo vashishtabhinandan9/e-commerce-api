@@ -19,7 +19,8 @@ const router = express.Router();
 const {
     signup,
     signin
-} = require('../controller/auth.controller');
+} = require('../../controller/admin/auth.controller');
+
 
 /**
  * otherway of requiring a function passed
@@ -37,12 +38,12 @@ const {
     validateSignUpRequest,
     validateSignInRequest,
     isRequestCorrect
-} = require('../middleware/request.validator');
+} = require('../../middleware/request.validator');
 
- 
+
 
 router.post('/signup', validateSignUpRequest, isRequestCorrect, signup);
-
+ 
 router.post('/signin', validateSignInRequest, isRequestCorrect, signin);
 
 module.exports = router;
