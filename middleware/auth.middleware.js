@@ -1,6 +1,8 @@
 const jsonwebtoken = require('jsonwebtoken');
 
 const isLoggedIn = (req, res, next) => {
+    
+    //console.log(req.user);
     if (req.headers.authorization) {
         const token = req.headers.authorization.split(' ')[1];
         let user = {};
@@ -14,6 +16,21 @@ const isLoggedIn = (req, res, next) => {
             })
         }
         req.user = user;
+       /* request body contains many things
+       req{
+        headers : ( ) ,
+        body : ( ),
+        lot  of other stuff
+        user :{
+            id 
+            and other stuff
+        }
+
+        }
+        */
+      //  console.log(req.user);
+
+      
     } else {
         return res.status(401).json({
             success: false,

@@ -11,17 +11,13 @@ const {
     isAdmin
 } = require('../middleware/auth.middleware');
 
-/*
+
 const {
     validateCreateCategoryRequest,
     isRequestCorrect
 } = require('../middleware/request.validator');
-*/
-/*
-router.post("/create", isLoggedIn, isAdmin, validateCreateCategoryRequest, isRequestCorrect, addNewCategory)
-router.get("/get", getCategory)
-*/
 
-router.post("/create",isLoggedIn, isAdmin, addNewCategory)
+
+router.post("/create", isLoggedIn,isAdmin,validateCreateCategoryRequest, isRequestCorrect, addNewCategory)
 router.get("/get", getCategory)
 module.exports = router;

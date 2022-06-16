@@ -21,7 +21,8 @@ const addNewCategory = (req, res) => {
         })
     };
 
-   // categoryInput.createdBy = req.user.id;
+    categoryInput.createdBy = req.user.id;//this is we creating an object field 
+    // outside object
 
     if (req.body.parentId) {
         categoryInput.parentId = req.body.parentId;//this is we creating an object field 

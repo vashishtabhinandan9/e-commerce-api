@@ -24,14 +24,15 @@ const categorySchema = mongoose.Schema({
         //so elctronic devie ahving some id is the paredid for mobile phone and 
       //  mobile phone itself will have some id 
     },
-    /*
+    
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
-        //here we are using objct id from a different model
+        //here we are using objct id from a different model for this we need to mention referrece
+        
         ref: "User",
         required: true,
     }
-*/
+
 }, {
     timestamps: true
 });
