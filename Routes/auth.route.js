@@ -21,7 +21,7 @@ const {
     signin
 } = require('../controller/auth.controller');
 
-/**
+/*
  * otherway of requiring a function passed
  * 
  * const usersigncontroller= require('../controller/user.controller');
