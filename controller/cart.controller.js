@@ -49,10 +49,12 @@ function udpateCartModel(condition, update) {
 
 const addToCart = (req, res) => {
     const customer = req.user;
+//step 1 checking if for that customer there is a cart or not 
     console.log(customer);
     cartModel.findOne({
         customer: customer.id
     }).exec((error, cart) => {
+        //if error no cart exist elese cart exist 
         if (error) return getErrorResponse(res, 500, error)
         // isRequestCorrect = validateCart(cartData, cart.cartItems);
         // if (isRequestCorrect) {
@@ -64,8 +66,14 @@ const addToCart = (req, res) => {
             cartData.forEach((cartItem) => {
                 let product = cartItem.product; //p1
                 let item = cart.cartItems.find(c => c.product == product);
+                //as a cart alrady exist for that user  and we send a new list of products
+                //now we are cheking if that produnt
+                //already exist in the cart or not .
+                //coz there can two cases
+                //case:1 that it is a new product added to cart. 
+                //case:2 existing product added again so only increase its quantity
                 let condition, update;
-                if (item) {
+                if (item) {//case 2 item exist so update the quantity
                     console.log(item);
                     const newItemquantity = item.quantity + cartItem.quantity
                     condition = {
@@ -83,7 +91,9 @@ const addToCart = (req, res) => {
                     /**
                      * 
                      *  step 1  find cart based on customer id.
-                     *  step 2 push the current item from req.body i.e. cartItem into the cart document found based on the condition in step 1.
+                     *  step 2 push the current item from req.body
+                     *  i.e. cartItem into the cart document found based on the
+                     *  condition in step 1.
                      * step 3 update the cart document
                      * 
                     */
@@ -94,7 +104,7 @@ const addToCart = (req, res) => {
                     }
                     update = {
                         "$push": {
-                            "cartItems": cartItem
+                            "cartItems": cartItem 
                         }
                     }
                 }
