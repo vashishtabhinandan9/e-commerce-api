@@ -1,4 +1,5 @@
-/*const {
+/*
+const {
     nanoid
 } = require('nanoid')
 */
@@ -45,7 +46,7 @@ const signup = (req, res) => {
             lastname,
             password,
             role: 'admin',
-            username: Math.random.toString(),
+            username: Math.random().toString(),
         });
 
         _admin.save((error, admin) => {

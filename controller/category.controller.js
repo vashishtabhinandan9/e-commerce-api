@@ -3,17 +3,15 @@ const slugify = require('slugify')
 const {
     nanoid
 } = require('nanoid')
-*/
 
+*/
 const categoryModel = require('../Models/categoryModel');
 
 
 const addNewCategory = (req, res) => {
-/*
-    let slug = slugify(req.body.name, {
-        lower: true
-    })// + '-' + nanoid(8);
-*/
+
+//    let slug = slugify(req.body.name, {lower: true})+ '-' + nanoid(8);
+
     const categoryInput = {
         name: req.body.name,
         slug: slugify(req.body.name, {

@@ -7,6 +7,8 @@ const {
     nanoid
 } = require('nanoid')
 */
+
+
 const {
     generateJwtToken
 } = require('../helpers/helper');
@@ -52,7 +54,7 @@ const signup = (req, res) => {
             firstname,
             lastname,
             password,
-            username: Math.random().toString(),
+            username: Math.random().toString()//nanoid(10)//this will genereate a randoem user id 
         });
 
         _user.save((error, user) => {
