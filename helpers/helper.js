@@ -9,8 +9,9 @@ const generateJwtToken = (id, role) => {
     });
 }
 
-const ErrorArray = [];//day34 35 time after 1:15:00
-ErrorArray[500] = "DB Error Occurred. Contact your administrator"
+const ErrorArray = [];//watch here day34 35 time after 1:15:00
+ErrorArray[500] = "DB Error Occurred. Contact your administrator"//500 and 400 are the status code 
+//that are genrally passed 
 ErrorArray[400] = "Bad Request"
 
 const getErrorResponse = (res, statusCode, message = null, error = null) => {
@@ -44,8 +45,8 @@ const getResponseV2 = (res, state, statusCode, message = "", data = []) => {
 
 
 module.exports = {
-    generateJwtToken
-  //  getErrorResponse,
-  //  getResponseV1,
-   // getResponseV2
+    generateJwtToken,
+    getErrorResponse,
+   getResponseV1,
+    getResponseV2
 }

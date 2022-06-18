@@ -1,9 +1,10 @@
-const cartModel = require('../models/cart.model')
+const cartModel = require('../Models/cartModel')
 const {
     getErrorResponse,
     getResponseV1,
     getResponseV2
 } = require('../helpers/helper')
+
 const { response } = require('express')
 
 const validateCart = (new_cart, old_cart) => {
@@ -58,9 +59,9 @@ const addToCart = (req, res) => {
         if (cart) {
             //Cart is already created.  To Update the existing cartItems 
 
-            let promises = []
+            let promises = [];
             let cartData = req.body.cartItems;
-            cartData.forEach(cartItem => {
+            cartData.forEach((cartItem) => {
                 let product = cartItem.product; //p1
                 let item = cart.cartItems.find(c => c.product == product);
                 let condition, update;
@@ -86,6 +87,8 @@ const addToCart = (req, res) => {
                      * step 3 update the cart document
                      * 
                     */
+
+                    
                     condition = {
                         "customer": customer.id
                     }
@@ -103,6 +106,8 @@ const addToCart = (req, res) => {
             ).catch(
                 error => getErrorResponse(res, 500, error)
             )
+
+
         } else {
             console.log("in else");
             const _cart = new cartModel({

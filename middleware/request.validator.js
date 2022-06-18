@@ -28,6 +28,10 @@ const validateCreateCategoryRequest = [
  * ---Difficult----
  * custom validator
  * 
+ * apply a custom validator which check that for each cartitem added tocart 
+ * there is a productid and a quantity contained in it 
+ * 
+ * 
  * https://stackoverflow.com/questions/37339479/express-validator-to-validate-parameter-which-is-an-array
  * https://express-validator.github.io/docs/custom-validators-sanitizers.html#example-converting-to-mongodbs-objectid
  * */ 
@@ -53,6 +57,6 @@ module.exports = {
     validateSignUpRequest,
     validateSignInRequest,
     validateCreateCategoryRequest,
- //   validateAddToCartRequest,
+  validateAddToCartRequest,
     isRequestCorrect,
 }
